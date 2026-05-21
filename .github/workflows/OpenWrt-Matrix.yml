@@ -270,6 +270,8 @@ jobs:
         id: compileopenwrt
         continue-on-error: true
         run: |
+          make tools/compile -j$(nproc) || make tools/compile -j1 V=s
+          make toolchain/compile -j$(nproc) || make toolchain/compile -j1 V=s
           make -j$(nproc) || make -j1 V=s
       - name: If Error
         if: steps.compileopenwrt.outcome == 'failure'
